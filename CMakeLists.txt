@@ -15,8 +15,13 @@ set(LIBS m)
 # libdl
 set(LIBS ${LIBS} ${CMAKE_DL_LIBS})
 
+# zlib
+find_package(ZLIB REQUIRED)
+include_directories(${ZLIB_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${ZLIB_LIBRARIES})
+
 # OpenSSL
-find_package(OpenSSL)
+find_package(OpenSSL REQUIRED)
 set(LIBS ${LIBS} ${OPENSSL_LIBRARIES})
 
 # -pthread
