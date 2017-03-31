@@ -15,6 +15,10 @@ set(LIBS m)
 # libdl
 set(LIBS ${LIBS} ${CMAKE_DL_LIBS})
 
+# OpenSSL
+find_package(OpenSSL)
+set(LIBS ${LIBS} ${OPENSSL_LIBRARIES})
+
 # -pthread
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
