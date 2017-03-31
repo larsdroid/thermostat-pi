@@ -1,0 +1,39 @@
+# General: https://cmake.org/Wiki/CMake:How_To_Find_Libraries
+
+cmake_minimum_required(VERSION 3.1.0)
+project(thermostat-pi)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
+# TODO: -Wall ???
+#       clang ???
+#       EXECUTABLES: test_button test_database test_dht22 test_relay
+
+# -pthread
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+set(LIBS Threads::Threads)
+
+# -lwiringPi
+find_package(Wiringpi REQUIRED)
+include_directories(${WIRINGPI_INCLUDE_DIR})
+set(LIBS ${LIBS} ${WIRINGPI_LIBRARIES})
+
+# MariaDB or MySQL
+find_package(MYSQL) # Not REQUIRED since MariaDB is just as good
+if(${MYSQL_FOUND})
+    include_directories(${MYSQL_INCLUDE_DIRS})
+    set(LIBS ${LIBS} ${MYSQL_LIBRARIES})
+else()
+    find_package(MariaDB REQUIRED)
+    include_directories(${MARIADB_INCLUDE_DIR})
+    set(LIBS ${LIBS} ${MARIADB_LIBRARY_DIR})
+endif()
+
+include_directories(include)
+
+file(GLOB SOURCES "src/*.c")
+
+add_executable(thermostat ${SOURCES})
+
+target_link_libraries(thermostat ${LIBS})
