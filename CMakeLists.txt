@@ -9,10 +9,13 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 #       clang ???
 #       EXECUTABLES: test_button test_database test_dht22 test_relay
 
+# Math
+set(LIBS m)
+
 # -pthread
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
-set(LIBS Threads::Threads)
+set(LIBS ${LIBS} Threads::Threads)
 
 # -lwiringPi
 find_package(Wiringpi REQUIRED)
