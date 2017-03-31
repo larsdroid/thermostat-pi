@@ -49,7 +49,8 @@ endif()
 
 include_directories(include)
 
-file(GLOB SOURCES "src/*.c")
+set(SOURCES src/thermostat.c src/ini_file.c src/util.c src/display.c src/lcd.c src/db.c src/dht22.c src/mysql_util.c)
+#file(GLOB SOURCES "src/*.c")
 
 add_executable(thermostat ${SOURCES})
 
