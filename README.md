@@ -15,5 +15,5 @@ Building
 --
 On top of the dependencies listed above, the cmake utility is required to build the code.  
 Enter the following commands from within the project's root directory to start the build:  
-`cmake .
+`cmake .  
 make`
